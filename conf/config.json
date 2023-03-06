@@ -1,0 +1,101 @@
+{
+	"domain" : "vod.yypeople.com",
+	"https"  :
+	{
+		"listenIp"   : "0.0.0.0",
+		"listenPort" : 4443,
+		"tls"        :
+		{
+			"cert" : "/export/webrtc/mediasoup-signal-controller/certs/cert.pem",
+			"key"  : "/export/webrtc/mediasoup-signal-controller/certs/key.pem"
+		}
+	},
+	"mediasoup" :
+	{
+		"numWorkers"     : 1,
+		"workerPath":"/export/mediasoup-demo/server/node_modules/mediasoup2/worker/out/Debug/mediasoup-worker",
+		"unixPath":"/export/webrtc",
+		"workerSettings" :
+		{
+			"logLevel" : "warn",
+			"rtcMinPort" : 40000,
+			"rtcMaxPort" : 49999
+		},
+		"routerOptions" :
+		{
+			"mediaCodecs" :
+			[
+				{
+					"kind"      : "audio",
+					"mimeType"  : "audio/opus",
+					"clockRate" : 48000,
+					"channels"  : 2
+				},
+				{
+					"kind"       : "video",
+					"mimeType"   : "video/VP8",
+					"clockRate"  : 90000,
+					"parameters" :
+					{
+						"x-google-start-bitrate" : 1000
+					}
+				},
+				{
+					"kind"       : "video",
+					"mimeType"   : "video/VP9",
+					"clockRate"  : 90000,
+					"parameters" :
+					{
+						"profile-id"             : 2,
+						"x-google-start-bitrate" : 1000
+					}
+				},
+				{
+					"kind"       : "video",
+					"mimeType"   : "video/h264",
+					"clockRate"  : 90000,
+					"parameters" :
+					{
+						"packetization_mode"      : 1,
+						"profile-level-id"        : "4d0032",
+						"level_asymmetry_allowed" : 1,
+						"x-google-start-bitrate"  : 1000
+					}
+				},
+				{
+					"kind"       : "video",
+					"mimeType"   : "video/h264",
+					"clockRate"  : 90000,
+					"parameters" :
+					{
+						"packetization_mode"      : 1,
+						"profile-level-id"       : "42e01f",
+						"level_asymmetry_allowed" : 1,
+						"x-google-start-bitrate"  : 1000
+					}
+				}
+			]
+		},
+		"webRtcTransportOptions" :
+		{
+			"listenIps" :
+			[
+				{
+					"ip"          : "10.226.156.132"
+				}
+			],
+			"initialAvailableOutgoingBitrate" : 1000000,
+			"minimumAvailableOutgoingBitrate" : 600000,
+			"maxSctpMessageSize"              : 262144,
+			"maxIncomingBitrate"              : 1500000
+		},
+		"plainTransportOptions" :
+		{
+			"listenIp" :
+			{
+				"ip"          : "10.226.156.132"
+			},
+			"maxSctpMessageSize" : 262144
+		}
+	}
+}
